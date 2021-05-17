@@ -25,7 +25,10 @@ public class UrlsEntity implements Serializable {
      */
     @Id
     @Column(name = "ID", nullable = false)
-    private String id;
+    private long id;
+
+    @Column(name = "HEXID")
+    private String hexid;
 
     /**
      * This part of the UTL is NOT case sensitive, but put value only in lower case.

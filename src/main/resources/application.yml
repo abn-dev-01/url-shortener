@@ -27,9 +27,8 @@ spring:
 
   jpa:
     database-platform: ${JPA_DB_PLATFORM:org.hibernate.dialect.H2Dialect}
-    hibernate:
-      ddl-auto: create
     show-sql: ${JPA_SHOW_SQL:true}
+    
   liquibase:
     change-log: classpath:/db/changelog.xml
 
