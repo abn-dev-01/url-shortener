@@ -73,7 +73,7 @@ public class UrlServiceImpl implements UrlService {
 
         var savedEnity = urlsRepository.save(entity);
 
-        // update HXID 
+        // update HEXID 
         savedEnity.setHexid(Long.toHexString(savedEnity.getId()));
         savedEnity = urlsRepository.save(savedEnity);
 
