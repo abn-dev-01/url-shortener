@@ -1,0 +1,20 @@
+#
+server:
+  port: ${SERVER_PORT:8181}
+  error:
+    include-message: always
+    include-exception: true
+    include-stacktrace: always
+
+spring:
+  application:
+    name: shortener
+  main:
+    banner-mode: off
+    
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: ${JPA_SHOW_SQL:true}
+  liquibase:
+    change-log: classpath:/db/changelog.xml
