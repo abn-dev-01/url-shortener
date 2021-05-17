@@ -17,4 +17,6 @@ public interface UrlService {
         throws IncorrectUrlException;
 
     List<UrlsEntity> findUrl(UrlDto url);
+
+    String getRedirectUrl(String s);
 }

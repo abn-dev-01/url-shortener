@@ -24,6 +24,9 @@ public class UrlServiceImpl implements UrlService {
     @Value("${new.url.domain}")
     private String newUrlDomain;
 
+    @Value("${new.url.suffix}")
+    private String newUrlSuffix;
+
     @Override
     public ResultModel createShortUrl(final String url) {
 
@@ -54,7 +57,7 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public String getNewUrl(String path) {
-        return newUrlDomain + (newUrlDomain.endsWith("/") ? "" : "/") + path;
+        return newUrlDomain + newUrlSuffix + "/" + path;
     }
 
     @Override
@@ -83,5 +86,15 @@ public class UrlServiceImpl implements UrlService {
     public List<UrlsEntity> findUrl(UrlDto urlDto) {
         List<UrlsEntity> result = urlsRepository.findByDomainAndPath(urlDto.getDomain(), urlDto.getPath());
         return result;
+    }
+
+    @Override
+    public String getRedirectUrl(String hexid) {
+        List<UrlsEntity> urls = urlsRepository.findByHexid(hexid);
+        if (urls != null && urls.size() == 1) {
+            final UrlsEntity entity = urls.get(0);
+            return entity.getDomain() + entity.getPath();
+        }
+        return newUrlDomain;
     }
 }
