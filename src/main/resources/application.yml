@@ -2,7 +2,7 @@
 debug: true
 
 logging:
-  level: 
+  level:
     org.springframework: TRACE
     com.abndev: TRACE
 
@@ -18,17 +18,13 @@ spring:
     name: shortener
   main:
     banner-mode: off
-    
+
   datasource:
     url: ${DS_URL:jdbc:h2:file:/db/h2-shortener;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;DB_CLOSE_DELAY=-1}
     driverClassName: ${DS_DRIVER_CLASS_NAME:org.h2.Driver}
     username: ${H2_USER:sa}
     password: ${H2_PWD:sa}
 
-#  h2:
-#    console:
-#      enabled=true:
-        
   jpa:
     database-platform: ${JPA_DB_PLATFORM:org.hibernate.dialect.H2Dialect}
     hibernate:
@@ -37,4 +33,7 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog.xml
 
-  
+#
+new:
+  url:
+    domain: ${NEW_URL_DOMAIN:http://localhost:8181}

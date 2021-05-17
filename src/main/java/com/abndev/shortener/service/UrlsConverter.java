@@ -38,7 +38,9 @@ public class UrlsConverter {
                 if (matcher.groupCount() == 2 && matcher.group(2) != null) {
                     path = matcher.group(2);
                 }
-                return domain + path;
+                final String optimizedUrl = domain + path;
+                LOG.debug("Old url: {} \nnew url: {}", urlFromForm, optimizedUrl);
+                return optimizedUrl;
             } else {
                 throw new IncorrectUrlException();
             }
