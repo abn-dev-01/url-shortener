@@ -1,5 +1,6 @@
 package com.abndev.shortener.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "URLS")
 @Data
+@Builder
 public class UrlsEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,17 +25,17 @@ public class UrlsEntity implements Serializable {
      */
     @Id
     @Column(name = "ID", nullable = false)
-    private String ID;
+    private String id;
 
     /**
      * This part of the UTL is NOT case sensitive, but put value only in lower case.
      */
     @Column(name = "DOMAIN")
-    private String DOMAIN;
+    private String domain;
 
     /**
      * This part of the URL is case sensitive.
      */
     @Column(name = "PATH")
-    private String PATH;
+    private String path;
 }
