@@ -4,23 +4,31 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-    
+
     <changeSet id="00002" author="abNikitin" context="prod,dev">
-        
+
         <createTable tableName="urls" remarks="Contains URL and short link to it.">
             <column name="id" type="BIGINT" autoIncrement="true" remarks="ID auto inc">
                 <constraints primaryKey="true" unique="true" nullable="false"/>
             </column>
             <column name="hexid" type="VARCHAR(128)" remarks="HEX representation of the ID"/>
-            <column name="domain" type="VARCHAR(128)" remarks="This part of the UTL is NOT case sensitive, but put value only in lower case."/>
+            <column name="domain" type="VARCHAR(128)"
+                    remarks="This part of the UTL is NOT case sensitive, but put value only in lower case."/>
             <column name="path" type="VARCHAR(2000)" remarks="This part of the URL is case sensitive."/>
         </createTable>
-        
+
         <createIndex indexName="unq_domain_path" tableName="urls" unique="true">
             <column name="domain"/>
             <column name="path"/>
         </createIndex>
-        
+
     </changeSet>
-    
+
+    <changeSet id="00003" author="abNikitin" context="prod,dev">
+        <createIndex indexName="ind_hexid" tableName="urls" unique="true">
+            <column name="hexid"/>
+        </createIndex>
+    </changeSet>
+
+
 </databaseChangeLog>

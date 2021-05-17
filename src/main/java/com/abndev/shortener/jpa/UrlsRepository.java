@@ -9,4 +9,6 @@ import java.util.List;
 public interface UrlsRepository extends JpaRepository<UrlsEntity, String>, JpaSpecificationExecutor<UrlsEntity> {
 
     List<UrlsEntity> findByDomainAndPath(String domain, String path);
+
+    List<UrlsEntity> findByHexid(String hexid);
 }
