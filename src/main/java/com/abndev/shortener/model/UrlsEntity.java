@@ -1,7 +1,10 @@
 package com.abndev.shortener.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +19,8 @@ import java.io.Serializable;
 @Table(name = "URLS")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UrlsEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
