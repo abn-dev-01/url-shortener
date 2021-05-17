@@ -1,10 +1,11 @@
 package com.abndev.shortener.service;
 
 import com.abndev.shortener.exceptions.IncorrectUrlException;
+import com.abndev.shortener.model.UrlDto;
 import com.abndev.shortener.view.model.ResultModel;
 import com.abndev.shortener.model.UrlsEntity;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface UrlService {
 
@@ -12,8 +13,8 @@ public interface UrlService {
 
     String getNewUrl(String path);
 
-    UrlsEntity saveUrl(String url)
+    UrlsEntity saveUrl(UrlDto url)
         throws IncorrectUrlException;
 
-    Optional<UrlsEntity> findUrl(String url);
+    List<UrlsEntity> findUrl(UrlDto url);
 }

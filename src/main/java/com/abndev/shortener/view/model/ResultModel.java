@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ResultModel {
-    private boolean isError = false;
+    private boolean isError;
     private String errorMessage;
     private String newUrl;
     private String oldUrl;
