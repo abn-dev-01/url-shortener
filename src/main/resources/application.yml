@@ -1,4 +1,11 @@
 #
+debug: true
+
+logging:
+  level: 
+    org.springframework: TRACE
+    com.abndev: TRACE
+
 server:
   port: ${SERVER_PORT:8181}
   error:
@@ -18,9 +25,9 @@ spring:
     username: ${H2_USER:sa}
     password: ${H2_PWD:sa}
 
-  h2:
-    console:
-      enabled=true:
+#  h2:
+#    console:
+#      enabled=true:
         
   jpa:
     database-platform: ${JPA_DB_PLATFORM:org.hibernate.dialect.H2Dialect}
@@ -29,3 +36,11 @@ spring:
     show-sql: ${JPA_SHOW_SQL:true}
   liquibase:
     change-log: classpath:/db/changelog.xml
+
+  ## Spring view resolver set up 
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
+
+  
