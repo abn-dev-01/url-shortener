@@ -8,7 +8,7 @@
     <changeSet id="00002" author="abNikitin" context="prod,dev">
         
         <createTable tableName="urls" remarks="Contains URL and short link to it.">
-            <column name="id" type="INTEGER" autoIncrement="true" remarks="ID">
+            <column name="id" type="BIGINT" autoIncrement="true" remarks="ID auto inc">
                 <constraints primaryKey="true" unique="true" nullable="false"/>
             </column>
             <column name="hexid" type="VARCHAR(128)" remarks="HEX representation of the ID"/>

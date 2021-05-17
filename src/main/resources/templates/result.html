@@ -6,11 +6,20 @@
 </head>
 
 <body>
-<h1>Result</h1>
-<p th:text="'Your URL: ' + ${resultModel.oldUrl}"/>
-<p>Shorten URL:<a th:href="${resultModel.newUrl}"><span th:text="${resultModel.newUrl}"/></a></p>
+<div th:if="${resultModel.error}">
+    <h1>Error</h1>
+    <p th:text="${resultModel.errorMessage}"/>
 
-<a href="/">Submit another URL</a>
+    <a href="/">Submit another URL</a>
+</div>
+<!-- ELSE -->
+<div th:unless="${resultModel.error}">
+    <h1>Result</h1>
+    <p th:text="'Your URL: ' + ${resultModel.oldUrl}"/>
+    <p>Shorten URL:<a th:href="${resultModel.newUrl}"><span th:text="${resultModel.newUrl}"/></a></p>
+
+    <a href="/">Submit another URL</a>
+</div>
 </body>
 
 </html>
