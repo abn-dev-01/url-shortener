@@ -36,6 +36,10 @@ class UrlsConverterTest {
         var url1 = "HTTP://www.GOOGLE.com";
         var result = UrlsConverter.optimizeUrl(url1);
         Assertions.assertEquals(url1.toLowerCase(), result.getOptimizedUrl());
+        
+        url1 = "HTTP://www.GOOGLE.com/";
+        result = UrlsConverter.optimizeUrl(url1);
+        Assertions.assertEquals(url1.toLowerCase(), result.getOptimizedUrl());
     }
 
     @Test

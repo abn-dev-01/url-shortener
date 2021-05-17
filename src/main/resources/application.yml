@@ -35,4 +35,5 @@ spring:
 #
 new:
   url:
-    domain: ${NEW_URL_DOMAIN:http://localhost:8181/go}
+    domain: ${NEW_URL_DOMAIN:http://localhost:8181}
+    suffix: ${NEW_URL_SUFFIX:/go}

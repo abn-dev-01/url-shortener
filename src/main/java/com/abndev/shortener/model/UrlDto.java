@@ -10,6 +10,6 @@ public class UrlDto {
     private String path;
 
     public String getOptimizedUrl() {
-        return domain + (domain.endsWith("/") ? "" : "/") + path;
+        return domain + path;
     }
 }
