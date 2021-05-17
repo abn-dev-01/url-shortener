@@ -2,14 +2,16 @@ package com.abndev.shortener.service;
 
 import com.abndev.shortener.exceptions.IncorrectUrlException;
 import com.abndev.shortener.jpa.UrlsRepository;
-import com.abndev.shortener.view.model.ResultModel;
+import com.abndev.shortener.model.UrlDto;
 import com.abndev.shortener.model.UrlsEntity;
+import com.abndev.shortener.view.model.ResultModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,19 +27,22 @@ public class UrlServiceImpl implements UrlService {
     @Override
     public ResultModel createShortUrl(final String url) {
 
-        // we have to check is so url in the DB or not, find it in the DB.
-        Optional<UrlsEntity> urlOptional = findUrl(url);
-
-        UrlsEntity urlEntity;
         try {
-            if (!urlOptional.isPresent()) {
-                urlEntity = saveUrl(url);
+            var urlDto = UrlsConverter.optimizeUrl(url);
+
+            // we have to check is so url in the DB or not, find it in the DB.
+            var urls = findUrl(urlDto);
+
+            UrlsEntity urlEntity;
+            if (urls == null || urls.size() == 0) {
+                urlEntity = saveUrl(urlDto);
             } else {
-                urlEntity = urlOptional.get();
+                LOG.debug(" Checking URL: {}. Found records in DB: {}", url, urls.size());
+                urlEntity = urls.get(0);
             }
             return ResultModel.builder()
                               .oldUrl(url)
-                              .newUrl(getNewUrl(urlEntity.getId()))
+                              .newUrl(getNewUrl(urlEntity.getHexid()))
                               .build();
         } catch (IncorrectUrlException e) {
             return ResultModel.builder()
@@ -53,22 +58,30 @@ public class UrlServiceImpl implements UrlService {
     }
 
     @Override
-    public UrlsEntity saveUrl(String url)
+    @Transactional
+    public UrlsEntity saveUrl(UrlDto urlDto)
         throws IncorrectUrlException {
 
-        LOG.debug(" START saving url: {}", url);
-        String optimizedUrl = UrlsConverter.optimizeUrl(url);
-        UrlsEntity entity = UrlsEntity.builder()
-                                      .build();
+        LOG.debug(" START saving url: {}", urlDto);
+        var entity = UrlsEntity.builder()
+                               .domain(urlDto.getDomain())
+                               .path(urlDto.getPath())
+                               .build();
 
-        final UrlsEntity save = urlsRepository.save(entity);
-        LOG.debug(" END saving url: {}", url);
-        
-        return save;
+        var savedEnity = urlsRepository.save(entity);
+
+        // update HXID 
+        savedEnity.setHexid(Long.toHexString(savedEnity.getId()));
+        savedEnity = urlsRepository.save(savedEnity);
+
+        LOG.debug(" END saving url: {}", urlDto);
+
+        return savedEnity;
     }
 
     @Override
-    public Optional<UrlsEntity> findUrl(String url) {
-        return null;
+    public List<UrlsEntity> findUrl(UrlDto urlDto) {
+        List<UrlsEntity> result = urlsRepository.findByDomainAndPath(urlDto.getDomain(), urlDto.getPath());
+        return result;
     }
 }

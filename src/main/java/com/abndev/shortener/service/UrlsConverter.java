@@ -1,6 +1,7 @@
 package com.abndev.shortener.service;
 
 import com.abndev.shortener.exceptions.IncorrectUrlException;
+import com.abndev.shortener.model.UrlDto;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.regex.Pattern;
@@ -21,7 +22,7 @@ public class UrlsConverter {
      *
      * @throws IncorrectUrlException - when given URL is incorrect.
      */
-    public static String optimizeUrl(final String urlFromForm)
+    public static UrlDto optimizeUrl(final String urlFromForm)
         throws IncorrectUrlException {
 
         var pattern = Pattern.compile(DOMAIN_REGEX);
@@ -38,9 +39,10 @@ public class UrlsConverter {
                 if (matcher.groupCount() == 2 && matcher.group(2) != null) {
                     path = matcher.group(2);
                 }
-                final String optimizedUrl = domain + path;
-                LOG.debug("Old url: {} \nnew url: {}", urlFromForm, optimizedUrl);
-                return optimizedUrl;
+                var urlDto = UrlDto.builder().domain(domain).path(path).build();
+                LOG.debug("Old url: {} \nnew url: {}", urlFromForm, urlDto);
+
+                return urlDto;
             } else {
                 throw new IncorrectUrlException();
             }

@@ -19,13 +19,13 @@ class UrlsConverterTest {
     void optimizeUrl()
         throws IncorrectUrlException {
 
-        String url1 = "HTTP://www.GOOGLE.com/iphone/and/other";
-        String result = UrlsConverter.optimizeUrl(url1);
-        Assertions.assertEquals(url1.toLowerCase(), result);
+        var url1 = "HTTP://www.GOOGLE.com/iphone/and/other";
+        var result = UrlsConverter.optimizeUrl(url1);
+        Assertions.assertEquals(url1.toLowerCase(), result.getOptimizedUrl());
 
         url1 = "HTTPs://www.apple.com/iphone/123";
         result = UrlsConverter.optimizeUrl(url1);
-        Assertions.assertEquals(url1.toLowerCase(), result);
+        Assertions.assertEquals(url1.toLowerCase(), result.getOptimizedUrl());
     }
 
     @Test
@@ -33,9 +33,9 @@ class UrlsConverterTest {
     void optimizeUrlDOmainOnly()
         throws IncorrectUrlException {
 
-        String url1 = "HTTP://www.GOOGLE.com";
-        String result = UrlsConverter.optimizeUrl(url1);
-        Assertions.assertEquals(url1.toLowerCase(), result);
+        var url1 = "HTTP://www.GOOGLE.com";
+        var result = UrlsConverter.optimizeUrl(url1);
+        Assertions.assertEquals(url1.toLowerCase(), result.getOptimizedUrl());
     }
 
     @Test
@@ -47,7 +47,5 @@ class UrlsConverterTest {
         Assertions.assertThrows(IncorrectUrlException.class,
                                 () -> {UrlsConverter.optimizeUrl(url1);}
         );
-
-        final String url2 = "HTTPs://www.apple.com/iphone/123";
     }
 }
