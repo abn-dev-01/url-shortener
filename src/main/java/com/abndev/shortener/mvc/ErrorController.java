@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller("error")
+@Deprecated
+// TODO DEL ME 
 public class ErrorController {
 
     @ExceptionHandler(Exception.class)

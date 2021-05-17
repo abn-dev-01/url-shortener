@@ -37,10 +37,4 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog.xml
 
-  ## Spring view resolver set up 
-#  mvc:
-#    view:
-#      prefix: /WEB-INF/jsp/
-#      suffix: .jsp
-
   

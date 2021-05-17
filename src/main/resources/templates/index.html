@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
-<head lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
     <meta charset="UTF-8"/>
-    <title>ReactJS + Spring Data REST</title>
-    <link rel="stylesheet" href="/main.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-
-<div id="react"></div>
-
-<script src="built/bundle.js"></script>
-
+<p>
+    <span th:text="'Today is: ' + ${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}" th:remove="tag"></span>
+</p>
 </body>
 </html>
