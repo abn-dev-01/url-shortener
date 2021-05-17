@@ -1,0 +1,39 @@
+#
+debug: true
+
+logging:
+  level:
+    org.springframework: TRACE
+    com.abndev: TRACE
+
+server:
+  port: ${SERVER_PORT:8181}
+  error:
+    include-message: always
+    include-exception: true
+    include-stacktrace: always
+
+spring:
+  application:
+    name: shortener
+  main:
+    banner-mode: off
+
+  datasource:
+    url: ${DS_URL:jdbc:h2:mem:h2-shortener}
+    driverClassName: ${DS_DRIVER_CLASS_NAME:org.h2.Driver}
+    username: ${H2_USER:sa}
+    password: ${H2_PWD:sa}
+
+  jpa:
+    database-platform: ${JPA_DB_PLATFORM:org.hibernate.dialect.H2Dialect}
+    hibernate:
+      ddl-auto: create
+    show-sql: ${JPA_SHOW_SQL:true}
+  liquibase:
+    change-log: classpath:/db/changelog.xml
+
+#
+new:
+  url:
+    domain: ${NEW_URL_DOMAIN:http://localhost:9988}
