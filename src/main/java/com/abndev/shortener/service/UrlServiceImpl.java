@@ -19,7 +19,6 @@ import java.util.List;
 public class UrlServiceImpl implements UrlService {
 
     private final UrlsRepository urlsRepository;
-    private UrlsConverter urlsConverter;
 
     @Value("${new.url.domain}")
     private String newUrlDomain;
@@ -34,7 +33,7 @@ public class UrlServiceImpl implements UrlService {
             var urlDto = UrlsConverter.optimizeUrl(url);
 
             // we have to check is so url in the DB or not, find it in the DB.
-            var urls = findUrl(urlDto);
+            var urls = urlsRepository.findByDomainAndPath(urlDto.getDomain(), urlDto.getPath());
 
             UrlsEntity urlEntity;
             if (urls == null || urls.size() == 0) {
@@ -80,12 +79,6 @@ public class UrlServiceImpl implements UrlService {
         LOG.debug(" END saving url: {}", urlDto);
 
         return savedEnity;
-    }
-
-    @Override
-    public List<UrlsEntity> findUrl(UrlDto urlDto) {
-        List<UrlsEntity> result = urlsRepository.findByDomainAndPath(urlDto.getDomain(), urlDto.getPath());
-        return result;
     }
 
     @Override

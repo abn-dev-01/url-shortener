@@ -16,12 +16,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-//    ,
-//    properties = {"new.url.domain=https://localhost:9999"}
-    )
-//@ActiveProfiles("test")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UrlServiceImplTest {
 
     @Autowired
@@ -35,14 +30,6 @@ class UrlServiceImplTest {
 
     @MockBean
     private UrlsRepository urlsRepository;
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @Test
     void createShortUrl() {
@@ -73,13 +60,5 @@ class UrlServiceImplTest {
         var result = urlService.getNewUrl(path);
         var expected = newDomain + newSuffix + "/" + path;
         Assertions.assertEquals(result, expected);
-    }
-
-    @Test
-    void saveUrl() {
-    }
-
-    @Test
-    void findUrl() {
     }
 }

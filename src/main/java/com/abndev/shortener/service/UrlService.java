@@ -16,7 +16,5 @@ public interface UrlService {
     UrlsEntity saveUrl(UrlDto url)
         throws IncorrectUrlException;
 
-    List<UrlsEntity> findUrl(UrlDto url);
-
     String getRedirectUrl(String s);
 }
