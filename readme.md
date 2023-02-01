@@ -6,7 +6,7 @@ It is a system for creating a short url for given any url.
 
 This application is a Gradle project based on Spring-Boot, H2 database (and Database could be replaced with some other DB you want, using docker image or something else), Liquibase, and other modules (look at the build.gradle to get more details). 
 
-## What is this?
+## Description
 
 This is a web application. You need a browser to work with it.
 The default URL for the application is http://localhost:8181. 
