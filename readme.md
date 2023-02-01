@@ -1,15 +1,20 @@
 # URL Shortener mini HOWTO.
 
-## What is this?
+It is a system for creating a short url for given any url.
+
+## Technologies
 
 This application is a Gradle project based on Spring-Boot, H2 database (and Database could be replaced with some other DB you want, using docker image or something else), Liquibase, and other modules (look at the build.gradle to get more details). 
+
+## What is this?
 
 This is a web application. You need a browser to work with it.
 The default URL for the application is http://localhost:8181. 
 
-At the first-home page you will see a form, where you have to enter your link ( for example: https://www.microsoft.com/ru-ru/microsoft-365 ) and press Submit button. Then on the second page ( result page ), you will get your link and short link, which is a redirect to your link. 
+At the first-home page you will see a form, where you have to enter your link ( for example: https://www.microsoft.com/ru-ru/microsoft-365 ) and press Submit button. 
+Then on the second page ( result page ), you will get your link and short link, which is a redirect to your link. 
 
-###Algorithm 
+### Algorithm 
 We know that Protocol and domain name in the URL is Case Insensitive. This means that http://www.google.com is the same as HTTP://WWW.GOOGLE.com, but then the path is Case Sensitive. I split the domain part and path and store them separately in the Database's columns.  
 Each row in the table has an auto-generated numeric ID. This ID is represented in HEX format in the `hexid` column, exactly this hex value is the part of the new Short URL.
 
